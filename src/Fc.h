@@ -14,7 +14,7 @@ class Fc {
 public:
 
   template<class InputIterator>
-  Fc(const InputIterator start, const InputIterator end) {
+  Fc(const InputIterator& start, const InputIterator& end) {
     auto it = start;
     while (it != end) {
       _list.push_back(*it);
@@ -23,10 +23,10 @@ public:
   }
 
   Fc(const std::vector<T> list) {
-    _list = list;
+    _list = std::move(list);
   }
 
-  Fc map(std::function<T(T)> f) {
+  Fc map(const std::function<T(T)>& f) {
     std::vector<T> newVector;
     for (auto item :_list) {
       newVector.push_back(f(item));
@@ -34,7 +34,7 @@ public:
     return Fc(newVector);
   }
 
-  Fc filter(std::function<bool(T)> f) {
+  Fc filter(const std::function<bool(T)>& f) {
     std::vector<T> newVector;
     for (auto item :_list) {
       if (f(item)) {
@@ -44,7 +44,7 @@ public:
     return Fc(newVector);
   }
 
-  T reduce(std::function<T(T, T)> f) {
+  T reduce(const std::function<T(T, T)>& f) {
     T result=T();
     if (_list.size() > 0) {
       result = *_list.begin();
