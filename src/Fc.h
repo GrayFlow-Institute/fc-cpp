@@ -45,11 +45,13 @@ public:
   }
 
   T reduce(std::function<T(T, T)> f) {
-    T result;
+    T result=T();
     if (_list.size() > 0) {
       result = *_list.begin();
-      for (auto it = _list.begin() + 1; it != _list.end(); ++it) {
-        result = f(result, *it);
+      if (_list.size() > 1) {
+        for (auto it = _list.begin() + 1; it != _list.end(); ++it) {
+          result = f(result, *it);
+        }
       }
     }
     return result;
