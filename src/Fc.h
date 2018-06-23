@@ -26,7 +26,7 @@ public:
     _list = list;
   }
 
-  Fc map(std::function<int(T)> f) {
+  Fc map(std::function<T(T)> f) {
     std::vector<T> newVector;
     for (auto item :_list) {
       newVector.push_back(f(item));
