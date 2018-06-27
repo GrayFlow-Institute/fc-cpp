@@ -98,7 +98,7 @@ TEST(Fc, reduce) {
 
 }
 
-TEST(Fc, Iterator) {
+TEST(Fc, Container) {
 
   // vector iterator
   vector<int> l = {1, 2, 3, 4, 5, 6};
@@ -133,4 +133,12 @@ TEST(Fc, Iterator) {
   });
   EXPECT_EQ(v, 22);
 
+}
+
+TEST(Fc, Iterator) {
+  forward_list<int> list1 = {1};
+  auto fc=Fc<int>(list1);
+  for(auto i :fc){
+    EXPECT_EQ(i,1);
+  }
 }

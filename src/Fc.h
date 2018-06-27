@@ -23,7 +23,7 @@ public:
     }
   }
 
-  Fc(const std::forward_list<T> list) {
+  explicit Fc(const std::forward_list<T> list) {
     _list = std::move(list);
   }
 
@@ -49,6 +49,14 @@ public:
 
   std::forward_list<T> done() {
     return _list;
+  }
+
+  typename std::forward_list<T>::iterator begin() {
+    return _list.begin();
+  }
+
+  typename std::forward_list<T>::iterator end() {
+    return _list.end();
   }
 
 private:
