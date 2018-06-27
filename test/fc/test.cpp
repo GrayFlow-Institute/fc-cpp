@@ -41,12 +41,12 @@ TEST(Fc, filter) {
       1, 2, 3, 4, 5, 6
   };
   vector<int> vl = {
-      4, 5, 6
+      4, 5
   };
 
   auto v = Fc<int>(l)
       .filter([](int x) -> bool {
-        return x > 3;
+        return x > 3 and x < 6;
       })
       .done();
 
