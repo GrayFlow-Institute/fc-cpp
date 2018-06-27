@@ -5,6 +5,8 @@
 
 #include <gtest/gtest.h>
 #include <vector>
+#include <list>
+#include <forward_list>
 #include "../../src/Fc.h"
 
 using namespace std;
@@ -98,10 +100,9 @@ TEST(Fc, reduce) {
 }
 
 TEST(Fc, Iterator) {
-  vector<int> l = {
-      1, 2, 3, 4, 5, 6
-  };
 
+  // vector iterator
+  vector<int> l = {1, 2, 3, 4, 5, 6};
   auto v = Fc<int>(l.begin(), l.end()).map([](int x) {
     return x + 1;
   }).filter([](int x) {
@@ -111,14 +112,26 @@ TEST(Fc, Iterator) {
   });
   EXPECT_EQ(v, 22);
 
-  vector<int> l0;
-  v = Fc<int>(l0.begin(), l0.end()).map([](int x) {
+  // forward_list iterator
+  forward_list<int> l1 = {1, 2, 3, 4, 5, 6};
+  v = Fc<int>(l1.begin(), l1.end()).map([](int x) {
     return x + 1;
   }).filter([](int x) {
     return x > 3;
   }).reduce([](int x, int y) {
     return x + y;
   });
+  EXPECT_EQ(v, 22);
 
-  EXPECT_EQ(v, 0);
+  // list iterator
+  list<int> l2 = {1, 2, 3, 4, 5, 6};
+  v = Fc<int>(l2.begin(), l2.end()).map([](int x) {
+    return x + 1;
+  }).filter([](int x) {
+    return x > 3;
+  }).reduce([](int x, int y) {
+    return x + y;
+  });
+  EXPECT_EQ(v, 22);
+
 }

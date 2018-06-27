@@ -9,6 +9,7 @@
 #include <vector>
 #include <iterator>
 
+
 template<class T>
 class Fc {
 public:
@@ -34,10 +35,10 @@ public:
   }
 
   Fc filter(const std::function<bool(T)> &f) {
-    auto it=_list.begin();
-    while(it!=_list.end()){
-      if(!f(*it)){_list.erase(it);}
-      else{++it;}
+    auto it = _list.begin();
+    while (it != _list.end()) {
+      if (!f(*it)) { _list.erase(it); }
+      else { ++it; }
     }
     return *this;
   }
