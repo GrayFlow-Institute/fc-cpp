@@ -6,7 +6,7 @@
 #define SRC_FC_H
 
 #include <functional>
-#include <vector>
+#include <forward_list>
 #include <iterator>
 
 
@@ -18,50 +18,41 @@ public:
   Fc(const InputIterator &start, const InputIterator &end) {
     auto it = start;
     while (it != end) {
-      _list.push_back(*it);
+      _list.push_front(*it);
       ++it;
     }
   }
 
-  Fc(const std::vector<T> list) {
+  Fc(const std::forward_list<T> list) {
     _list = std::move(list);
   }
 
   Fc map(const std::function<T(T)> &f) {
     for (auto &item :_list) {
-      item = (f(item));
+      item = f(item);
     }
     return *this;
   }
 
   Fc filter(const std::function<bool(T)> &f) {
-    auto it = _list.begin();
-    while (it != _list.end()) {
-      if (!f(*it)) { _list.erase(it); }
-      else { ++it; }
-    }
+    _list.remove_if([f](T v) -> bool { return !f(v); });
     return *this;
   }
 
   T reduce(const std::function<T(T, T)> &f) {
     T result = T();
-    if (_list.size() > 0) {
-      result = *_list.begin();
-      if (_list.size() > 1) {
-        for (auto it = _list.begin() + 1; it != _list.end(); ++it) {
-          result = f(result, *it);
-        }
-      }
+    for (auto it = _list.begin(); it != _list.end(); ++it) {
+      result = f(result, *it);
     }
     return result;
   }
 
-  std::vector<T> done() {
+  std::forward_list<T> done() {
     return _list;
   }
 
 private:
-  std::vector<T> _list;
+  std::forward_list<T> _list;
 };
 
 

@@ -12,10 +12,10 @@
 using namespace std;
 
 TEST(Fc, map) {
-  vector<int> l = {
+  forward_list<int> l = {
       1, 2, 3, 4, 5, 6
   };
-  vector<int> vl = {
+  forward_list<int> vl = {
       2, 3, 4, 5, 6, 7
   };
 
@@ -27,7 +27,7 @@ TEST(Fc, map) {
   // 验证 map 正常操作
   EXPECT_EQ(vl, v);
 
-  vector<int> l0;
+  forward_list<int> l0;
   v = Fc<int>(l0)
       .map([](int x) -> int {
         return x + 1;
@@ -39,13 +39,12 @@ TEST(Fc, map) {
 }
 
 TEST(Fc, filter) {
-  vector<int> l = {
+  forward_list<int> l = {
       1, 2, 3, 4, 5, 6
   };
-  vector<int> vl = {
+  forward_list<int> vl = {
       4, 5
   };
-
   auto v = Fc<int>(l)
       .filter([](int x) -> bool {
         return x > 3 and x < 6;
@@ -55,7 +54,7 @@ TEST(Fc, filter) {
 //  验证 filter 的正常过滤操作
   EXPECT_EQ(vl, v);
 
-  vector<int> l0;
+  forward_list<int> l0;
   v = Fc<int>(l0)
       .filter([](int x) -> int {
         return 1;
@@ -67,7 +66,7 @@ TEST(Fc, filter) {
 }
 
 TEST(Fc, reduce) {
-  vector<int> l = {
+  forward_list<int> l = {
       1, 2, 3, 4, 5, 6
   };
 
@@ -79,7 +78,7 @@ TEST(Fc, reduce) {
 //  验证 reduce 正常操作
   EXPECT_EQ(v, 21);
 
-  vector<int> l0;
+  forward_list<int> l0;
   auto v0 = Fc<int>(l0)
       .reduce([](int x, int y) -> int {
         return x + y;
@@ -88,7 +87,7 @@ TEST(Fc, reduce) {
 //  验证 reduce 空列表操作
   EXPECT_EQ(v0, 0);
 
-  vector<int> l1 = {1};
+  forward_list<int> l1 = {1};
   auto v1 = Fc<int>(l1)
       .reduce([](int x, int y) -> int {
         return x + y;
