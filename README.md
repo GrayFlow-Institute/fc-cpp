@@ -1,4 +1,4 @@
-# fc-C++11 v0.0.1
+# fc-C++11 v0.0.2
 
 [![Build Status](https://travis-ci.org/GrayFlow-Institute/fc-cpp.svg?branch=master)](https://travis-ci.org/GrayFlow-Institute/fc-cpp)
 
