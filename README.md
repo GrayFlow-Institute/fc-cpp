@@ -1,4 +1,4 @@
-# fc-C++11 v0.0.3
+# fc-C++11 v0.0.4
 
 [![Build Status](https://travis-ci.org/GrayFlow-Institute/fc-cpp.svg?branch=master)](https://travis-ci.org/GrayFlow-Institute/fc-cpp)
 
@@ -75,6 +75,7 @@ int main(){
 
 ## 更新历史
 
+- 2018-07-05 v0.0.4 修复了一个智障未返回引用的性能优化错误
 - 2018-06-27 v0.0.3 让 Fc 支持迭代器，即类似于 `for(auto v:fc){...}` 格式的操作
 - 2018-06-27 v0.0.2 修改 vector 为 forward_list，以减少扩容 vector 性能损失
 - 2018-06-23 v0.0.1 文档编写

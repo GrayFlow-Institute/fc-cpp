@@ -27,14 +27,14 @@ public:
     _list = std::move(list);
   }
 
-  Fc map(const std::function<T(T)> &f) {
+  Fc& map(const std::function<T(T)> &f) {
     for (auto &item :_list) {
       item = f(item);
     }
     return *this;
   }
 
-  Fc filter(const std::function<bool(T)> &f) {
+  Fc& filter(const std::function<bool(T)> &f) {
     _list.remove_if([f](T v) -> bool { return !f(v); });
     return *this;
   }
@@ -47,7 +47,7 @@ public:
     return result;
   }
 
-  std::forward_list<T> done() {
+  std::forward_list<T>& done() {
     return _list;
   }
 
