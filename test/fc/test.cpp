@@ -137,8 +137,35 @@ TEST(Fc, Container) {
 
 TEST(Fc, Iterator) {
   forward_list<int> list1 = {1};
-  auto fc=Fc<int>(list1);
-  for(auto i :fc){
+  auto fc = Fc<int>(list1);
+
+  // i is a const type
+  for (const auto i:fc) {
     EXPECT_EQ(i,1);
   }
+  // i is a const reference
+  for (const auto& i:fc) {
+    EXPECT_EQ(i,1);
+  }
+
+  // i is a local variable
+  for (auto i :fc) {
+    EXPECT_EQ(i, 1);
+    i = 2;
+    EXPECT_EQ(i, 2);
+  }
+
+  for (auto i :fc) {
+    EXPECT_NE(i, 2);
+  }
+
+  // i is a reference,it will change variable
+  for (auto &i:fc) {
+    EXPECT_EQ(i, 1);
+    i = 2;
+  }
+  for (auto i:fc) {
+    EXPECT_EQ(i, 2);
+  }
+
 }
