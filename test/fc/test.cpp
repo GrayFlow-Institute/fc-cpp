@@ -7,9 +7,12 @@
 #include <vector>
 #include <list>
 #include <forward_list>
-#include "../../src/Fc.h"
+#include "fc/fc.hpp"
 
 using namespace std;
+
+namespace {
+
 
 TEST(Fc, map) {
   forward_list<int> l = {
@@ -168,4 +171,5 @@ TEST(Fc, Iterator) {
     EXPECT_EQ(i, 2);
   }
 
+}
 }

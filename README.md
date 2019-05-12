@@ -1,4 +1,4 @@
-# fc-C++11 v0.0.4
+# fc-C++11
 
 [![Build Status](https://travis-ci.org/GrayFlow-Institute/fc-cpp.svg?branch=master)](https://travis-ci.org/GrayFlow-Institute/fc-cpp)
 
@@ -71,10 +71,11 @@ int main(){
 - [x] 增加灵活性
 - [x] 支持迭代器
 - [ ] **可扩展地**支持更多的功能性函数
-- [ ] 构建安装包
+- [x] 构建安装包
 
 ## 更新历史
 
+- 2019-05-12 v0.0.5 修改目录结构，使用删除原来的 lib 改用 hpp
 - 2018-07-05 v0.0.4 修复了一个智障未返回引用的性能优化错误
 - 2018-06-27 v0.0.3 让 Fc 支持迭代器，即类似于 `for(auto v:fc){...}` 格式的操作
 - 2018-06-27 v0.0.2 修改 vector 为 forward_list，以减少扩容 vector 性能损失
