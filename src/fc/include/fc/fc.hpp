@@ -27,14 +27,34 @@ public:
     _list = std::move(list);
   }
 
-  Fc& map(const std::function<T(T)> &f) {
+  Fc &operator=(const Fc &fc) {
+    fc._list = this->_list;
+  }
+
+  Fc(const Fc &fc) {
+    fc = *this;
+  }
+
+  Fc(Fc &&fc) noexcept: _list(move(fc._list)) {}
+
+  Fc &map(const std::function<T(T)> &f) {
     for (auto &item :_list) {
       item = f(item);
     }
     return *this;
   }
 
-  Fc& filter(const std::function<bool(T)> &f) {
+  template<typename E>
+  Fc<E> map(const std::function<E(T)> &f) {
+    auto nl = std::forward_list<E>();
+    auto it = nl.before_begin();
+    for (const auto &item:_list) {
+      it = nl.insert_after(it, f(item));
+    }
+    return Fc<E>(std::move(nl));
+  }
+
+  Fc &filter(const std::function<bool(T)> &f) {
     _list.remove_if([f](T v) -> bool { return !f(v); });
     return *this;
   }
@@ -47,7 +67,7 @@ public:
     return result;
   }
 
-  std::forward_list<T>& done() {
+  std::forward_list<T> &done() {
     return _list;
   }
 
