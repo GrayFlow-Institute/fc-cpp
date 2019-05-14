@@ -8,6 +8,7 @@
 
 #include <functional>
 #include <forward_list>
+#include <vector>
 #include <iterator>
 #include <algorithm>
 
