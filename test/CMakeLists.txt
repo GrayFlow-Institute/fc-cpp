@@ -18,4 +18,5 @@ add_executable(
 target_link_libraries(
     Fc_Test
     gtest
+    gtest_main
 )

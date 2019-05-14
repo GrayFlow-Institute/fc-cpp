@@ -75,7 +75,10 @@ int main(){
 
 ## 更新历史
 
-- 2019-05-12 v0.0.6 
+- 2019-05-12 v0.0.7
+    - 增加 `namespace fc;` 作用域
+    - 增加 `to_vector` 功能
+- 2019-05-12 v0.0.6
   - 增加复制、移动构造函数，同时重载 `=` 号
   - 增加 `map` 返回新类型返回值的重载，使用例如 `fc` 内嵌 `int` 类型的链表：`fc.map<std::string>([](int x)->std::string{return std::to_string(x);}).done();` 即可返回一个内嵌 `std::string` 类型链表的 fc
 - 2019-05-12 v0.0.5 修改目录结构，使用删除原来的 lib 改用 hpp
