@@ -9,6 +9,7 @@
 #include <functional>
 #include <forward_list>
 #include <iterator>
+#include <algorithm>
 
 namespace fc {
 
