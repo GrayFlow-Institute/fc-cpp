@@ -10,6 +10,7 @@
 #include "fc/fc.hpp"
 
 using namespace std;
+using namespace fc;
 
 namespace {
 
@@ -180,5 +181,13 @@ namespace {
       EXPECT_EQ(i, 2);
     }
 
+  }
+
+  TEST(Fc, to_vector) {
+    forward_list<int> list1 = {1, 2};
+    vector<int> list2 = {1, 2};
+
+    auto list = Fc<int>(list1).to_vector();
+    ASSERT_EQ(list, list2);
   }
 }
