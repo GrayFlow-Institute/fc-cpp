@@ -164,6 +164,9 @@ namespace {
   }
 
   TEST(Fc, Iterator) {
+    vector<int> va = {1, 2};
+    EXPECT_EQ(va, Fc<int>(va.begin(), va.end()).to_vector());
+
     forward_list<int> list1 = {1};
     auto fc = Fc<int>(list1);
 

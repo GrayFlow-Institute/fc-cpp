@@ -21,10 +21,11 @@ namespace fc {
 
     template<class InputIterator>
     Fc(const InputIterator &start, const InputIterator &end) {
-      auto it = start;
-      while (it != end) {
-        _list.push_front(*it);
-        ++it;
+      auto it = _list.before_begin();
+      auto data = start;
+      while (data != end) {
+        it = _list.insert_after(it, *data);
+        ++data;
       }
     }
 
