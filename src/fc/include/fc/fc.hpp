@@ -64,6 +64,13 @@ namespace fc {
       return *this;
     }
 
+    Fc &print() {
+      for (const auto &it :_list) {
+        std::cout << it << " ";
+      }
+      return *this;
+    }
+
     Fc &print(const std::function<std::string(T)> &f) {
       for (const auto &it :_list) {
         std::cout << f(it) << " ";
