@@ -7,7 +7,6 @@ aux_source_directory(. DIR)
 aux_source_directory(fc FC)
 
 include_directories(../src/fc/include)
-link_directories(/usr/lib)
 
 add_executable(
     Fc_Test

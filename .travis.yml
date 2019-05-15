@@ -2,13 +2,11 @@ language:
   - cpp
 
 before_script:
-  - sudo apt-get update
-  - sudo apt-get install libgtest-dev
-  - cd test
+  - git submodule update --init --recursive
   - mkdir ci_test
   - cd ci_test
   - cmake ..
   - make -j8
 
 script:
-  - ./test/Fc_Test
+  - ./ci_test/test/Fc_Test
