@@ -6,11 +6,12 @@
 #define SRC_FC_H
 
 
-#include <functional>
 #include <forward_list>
 #include <vector>
 #include <iterator>
 #include <algorithm>
+#include <functional>
+#include <iostream>
 
 namespace fc {
 
@@ -41,7 +42,7 @@ namespace fc {
 
     Fc(Fc &&fc) noexcept: _list(move(fc._list)) {}
 
-    Fc &map(const std::function<T(T)> &f) {
+    inline Fc &map(const std::function<T(T)> &f) {
       for (auto &item :_list) {
         item = f(item);
       }
@@ -49,7 +50,7 @@ namespace fc {
     }
 
     template<typename E>
-    Fc<E> map(const std::function<E(T)> &f) {
+    inline Fc<E> map(const std::function<E(T)> &f) {
       auto nl = std::forward_list<E>();
       auto it = nl.before_begin();
       for (const auto &item:_list) {
@@ -58,24 +59,42 @@ namespace fc {
       return Fc<E>(std::move(nl));
     }
 
-    Fc &filter(const std::function<bool(T)> &f) {
+    inline Fc &filter(const std::function<bool(T)> &f) {
       _list.remove_if([f](T v) -> bool { return !f(v); });
       return *this;
     }
 
-    T reduce(const std::function<T(T, T)> &f) {
+    Fc &print(const std::function<std::string(T)> &f) {
+      for (const auto &it :_list) {
+        std::cout << f(it) << " ";
+      }
+      std::cout << std::endl;
+      return *this;
+    }
+
+    inline T reduce(const std::function<T(T, T)> &f) {
       T result = T();
-      for (auto it = _list.begin(); it != _list.end(); ++it) {
-        result = f(result, *it);
+      for (const auto &it:_list) {
+        result = f(result, it);
       }
       return result;
     }
 
-    std::forward_list<T> &done() {
+    template<class E>
+    inline E reduce(const std::function<E(E, T)> &f) {
+      E result;
+      for (const auto &it:_list) {
+        result = f(result, it);
+      }
+      return result;
+    }
+
+
+    inline std::forward_list<T> &done() {
       return _list;
     }
 
-    std::vector<T> to_vector() {
+    inline std::vector<T> to_vector() {
       std::vector<T> vector;
       std::for_each(_list.begin(), _list.end(), [&vector](T x) {
         vector.push_back(x);

@@ -6,6 +6,7 @@
 #include <gtest/gtest.h>
 #include <vector>
 #include <list>
+#include <string>
 #include <forward_list>
 #include "fc/fc.hpp"
 
@@ -14,6 +15,14 @@ using namespace fc;
 
 namespace {
 
+  TEST(Fc, print) {
+    forward_list<int> l = {1, 2, 3, 4};
+    forward_list<int> ll = Fc<int>({1, 2, 3, 4}).print([](int x) -> string {
+      return to_string(x);
+    }).done();
+
+    ASSERT_EQ(ll, l);
+  }
 
   TEST(Fc, map) {
     forward_list<int> l = {
@@ -82,6 +91,12 @@ namespace {
     forward_list<int> l = {
         1, 2, 3, 4, 5, 6
     };
+
+    auto ve = Fc<int>(l)
+        .reduce<string>([](string x, int y) -> string {
+          return x + to_string(y);
+        });
+    EXPECT_EQ(ve, "123456");
 
     auto v = Fc<int>(l)
         .reduce([](int x, int y) -> int {
