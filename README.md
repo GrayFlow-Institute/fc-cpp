@@ -14,7 +14,7 @@
 一般的，我们使用 C++ STL 的 std::forward_list 来作为动态数组传递给 Fc 模板类，例如
 
 ```cpp
-#include <Fc.h>
+#include <fc/fc.h>
 #include <forward_list>
 
 using namespace fc;
@@ -42,7 +42,7 @@ int main(){
 当然，Fc 也支持使用迭代器来**拷贝**容器到内建的 forward_list，以提高**灵活性**和**兼容**更多容器
 
 ```cpp
-#include <Fc.h>
+#include <fc/fc.h>
 #include <forward_list>
 
 using namespace fc;
@@ -68,7 +68,7 @@ int main(){
 ### 函数使用一览
 
 ```cpp
-#include <Fc.h>
+#include <fc/fc.h>
 #include <forward_list>
 
 using namespace fc;
